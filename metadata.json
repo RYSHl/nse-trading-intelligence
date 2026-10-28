@@ -1,0 +1,6 @@
+{
+  "name": "NSE Trading Intelligence",
+  "description": "Professional algorithmic trading intelligence, technical scanning, backtesting, and paper execution platform for the National Stock Exchange of India (NSE).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
