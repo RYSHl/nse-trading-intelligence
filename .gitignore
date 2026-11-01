@@ -1,8 +1,36 @@
+# Node dependencies & builds
 node_modules/
 build/
 dist/
 coverage/
-.DS_Store
-*.log
+
+# Environment variables & secrets
 .env*
 !.env.example
+
+# Temporary runtime PIDs and logs
+*.pid
+.backend.pid
+.frontend.pid
+*.log
+backend.log
+frontend.log
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+nse_trading.db
+
+# Python & testing cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# OS specific files
+.DS_Store
+Thumbs.db

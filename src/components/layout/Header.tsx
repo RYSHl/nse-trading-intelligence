@@ -4,7 +4,7 @@ import { RefreshCw, Play, ShieldAlert, ShieldCheck } from 'lucide-react';
 import { api } from '../../services/api';
 
 export const Header: React.FC = () => {
-  const { marketStatus, paperAccount, fetchAllData, setNotification } = useTradingStore();
+  const { marketStatus, paperAccount, isBackendOnline, fetchAllData, setNotification } = useTradingStore();
   const [isRefreshing, setIsRefreshing] = React.useState(false);
 
   const handleRefresh = async () => {
@@ -52,6 +52,27 @@ export const Header: React.FC = () => {
           </div>
         </div>
 
+        {/* Backend Connectivity Status Badge */}
+        <div
+          className={`hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded border text-[11px] font-mono ${
+            isBackendOnline
+              ? 'bg-emerald-950/40 border-emerald-800/60 text-emerald-300'
+              : 'bg-amber-950/40 border-amber-700/60 text-amber-300'
+          }`}
+          title={
+            isBackendOnline
+              ? 'FastAPI Backend Engine is online (/api)'
+              : 'FastAPI Backend is offline. Running in simulated static mode. Start local server with ./scripts/start-dev.sh for live scanning.'
+          }
+        >
+          <span
+            className={`w-2 h-2 rounded-full ${
+              isBackendOnline ? 'bg-emerald-400' : 'bg-amber-400 animate-pulse'
+            }`}
+          />
+          <span>{isBackendOnline ? 'BACKEND: ONLINE' : 'BACKEND: OFFLINE (SIMULATED)'}</span>
+        </div>
+
         {/* Explicit Session Status Badge - Never fake LIVE */}
         <div className="flex items-center gap-2 px-2.5 py-1 rounded bg-slate-900/80 border border-slate-800 text-[11px] font-mono">
           <span className="text-slate-400">SESSION:</span>
@@ -65,7 +86,9 @@ export const Header: React.FC = () => {
         {/* Data Source */}
         <div className="hidden lg:flex items-center gap-1.5 text-[11px] text-slate-400 font-mono">
           <span className="text-slate-300">FEED:</span>
-          <span className="text-slate-300">Yahoo Historical / Replay</span>
+          <span className="text-slate-300">
+            {isBackendOnline ? 'Yahoo Historical / Replay' : 'Simulated NSE Replay'}
+          </span>
         </div>
       </div>
 
